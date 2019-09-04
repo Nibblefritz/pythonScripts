@@ -21,6 +21,7 @@ print(psutil.cpu_freq())
 #get load average
 print(psutil.getloadavg())
 
+print()
 print("Memory")
 
 #virtual
@@ -41,8 +42,25 @@ print("SWAP used: ", end = ''), print(round(psutil.swap_memory().used / (1024 **
 print("SWAP free: ", end = ''), print(round(psutil.swap_memory().free / (1024 ** 3), 2), end = ''), print(" GB")
 print("SWAP Percent used: ", end = ''), print(psutil.swap_memory().percent, end = ''), print("%")
 
+print()
 print("Disks")
 
 print(psutil.disk_partitions())
-print(psutil.disk_usage('C:\\'))
-print(psutil.disk_io_counters('C:\\'))
+
+while True:
+    drive = input("Which drive do you want to checK? (q to quit) ")
+    if drive == "q":
+        break
+    print(psutil.disk_usage(drive + ":\\"))
+    print(psutil.disk_io_counters(drive + ":\\"))
+
+print()
+print("Network)")
+
+print(psutil.net_io_counters(pernic=True))
+
+print()
+print(psutil.net_if_stats())
+
+print()
+print(psutil.net_if_addrs())
